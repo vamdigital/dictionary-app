@@ -5,7 +5,6 @@ interface Props {
 }
 export const PlayAudio = ({ audioSrc }: Props) => {
   const clickHandler = () => {
-    console.log({ audioSrc })
     new Audio(audioSrc).play()
   }
   return (
