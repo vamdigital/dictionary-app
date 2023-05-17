@@ -16,8 +16,21 @@ export default function Home() {
     setSearchedWord(val)
   }
 
+  const fontFam = () => {
+    switch (fontFamily) {
+      case 'mono':
+        return 'font-mono'
+      case 'sans':
+        return 'font-sans'
+      case 'serif':
+        return 'font-serif'
+      default:
+        return 'font-serif'
+    }
+  }
+
   return (
-    <main className={`flex flex-col font-${fontFamily}`}>
+    <main className={`flex flex-col ${fontFam()}`}>
       <div className="container">
         <Header />
         <SearchBox submitHandler={submitHandler} />
