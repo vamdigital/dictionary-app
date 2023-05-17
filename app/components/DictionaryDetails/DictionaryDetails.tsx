@@ -1,5 +1,6 @@
 import { Data, Definition } from '@vam/data/types'
 import { PlayAudio } from '../PlayAudio'
+import Image from 'next/image'
 
 interface Props {
   data: Data[]
@@ -35,17 +36,18 @@ const ExampleText = ({ definition }: { definition: Definition[] }) => {
   )
 }
 
-const SynoAntoList = ({ synonym }: { synonym: string[] }) => {
+const synoAntoList = ({ synonym }: { synonym: string[] }) => {
   if (!synonym) return null
-  return (
-    <div className="flex gap-2 m-5">
-      {synonym.map(s => (
-        <span className="text-xl text-purple-700" key={s}>
-          {synonym}
-        </span>
-      ))}
-    </div>
-  )
+  return synonym.reduce<string[]>((acc, curr) => {
+    acc = [...acc, curr]
+    return acc
+  }, [])
+}
+
+const joinedList = ({ synonym }: { synonym: string[] }) => {
+  const list = synoAntoList({ synonym })
+  if (!list) return null
+  return list.join(', ')
 }
 
 export const DictionaryDetails = ({ data }: Props) => {
@@ -77,19 +79,28 @@ export const DictionaryDetails = ({ data }: Props) => {
                   </h3>
                   <DefinitionList definition={meaning.definitions} />
                   {meaning.synonyms && meaning.synonyms.length > 0 && (
-                    <div className="flex items-baseline">
-                      <h4 className="text-2xl lg:text-3xl text-slate-500 mb-5">
+                    <div className="flex items-center gap-3 my-5">
+                      <h4 className="text-2xl lg:text-3xl text-slate-500">
                         Synonyms
                       </h4>
-                      <SynoAntoList synonym={meaning.synonyms} />
+                      <div className="flex">
+                        <span className="flex text-xl text-purple-700">
+                          {joinedList({ synonym: meaning.synonyms })}
+                        </span>
+                      </div>
                     </div>
                   )}
+
                   {meaning.antonymns && meaning.antonymns.length > 0 && (
-                    <div className="flex gap-2 items-baseline">
+                    <div className="flex items-baseline">
                       <h4 className="text-2xl lg:text-3xl text-slate-500 mb-5">
                         Antonymns
                       </h4>
-                      <SynoAntoList synonym={meaning.antonymns} />
+                      <div className="flex">
+                        <span className="flex text-xl text-purple-700">
+                          {joinedList({ synonym: meaning.antonymns })}
+                        </span>
+                      </div>
                     </div>
                   )}
                   <ExampleText definition={meaning.definitions} />
@@ -98,14 +109,22 @@ export const DictionaryDetails = ({ data }: Props) => {
             ))}
             <div className="flex mb-2 mt-2 py-4 px-2 border-t-[1px] border-t-slate-700 gap-2">
               <h5>Source: </h5>
-              {d.sourceUrls.map(url => (
+              {d.sourceUrls.slice(0, 1).map(url => (
                 <a
                   key={url}
                   href={url}
-                  className="flex overflow-hidden overflow-ellipsis whitespace-nowrap"
+                  className="flex overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-blue-700 underline underline-offset-4"
                   target="_blank"
                 >
                   {url}
+                  <div className="flex px-2">
+                    <Image
+                      src="icon_source.svg"
+                      width={12}
+                      height={12}
+                      alt="external source icon"
+                    />
+                  </div>
                 </a>
               ))}
             </div>
