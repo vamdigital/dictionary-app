@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../../../public/logo-new.svg'
 import { useFontFamilyContext } from '@vam/context/fontFamily/context'
 import { ActionTypes } from '@vam/context/fontFamily/types'
@@ -9,11 +9,15 @@ import { ActionType } from '@vam/context/ThemeContext/types'
 export const Header = () => {
   const { dispatch } = useFontFamilyContext()
   const { state, dispatch: themeDispatch } = useThemeContext()
-  const buttonInitialIcon = state.theme === ActionType.DARK ? '🔆' : '🌙'
-  const [buttonText, setButtonText] = useState(buttonInitialIcon)
+  const [buttonText, setButtonText] = useState('')
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch({ type: e.target.value } as ActionTypes)
   }
+
+  useEffect(() => {
+    const buttonInitialIcon = state.theme === ActionType.DARK ? '🔆' : '🌙'
+    setButtonText(buttonInitialIcon)
+  }, [state.theme])
 
   const themeButtonClickHandler = () => {
     if (state.theme === ActionType.DARK) {
