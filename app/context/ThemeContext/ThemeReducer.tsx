@@ -1,8 +1,10 @@
 import { ActionType, ThemeState, initialTheme } from './types'
 
-const initTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches
-  ? ActionType.DARK
-  : ActionType.LIGHT
+const initTheme =
+  typeof window !== 'undefined' &&
+  window?.matchMedia('(prefers-color-scheme: dark)').matches
+    ? ActionType.DARK
+    : ActionType.LIGHT
 
 export const defaultTheme = {
   theme: initTheme
