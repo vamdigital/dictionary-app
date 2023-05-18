@@ -1,6 +1,6 @@
 import { ActionType, ThemeState, initialTheme } from './types'
 
-const initTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+const initTheme = window?.matchMedia('(prefers-color-scheme: dark)').matches
   ? ActionType.DARK
   : ActionType.LIGHT
 
