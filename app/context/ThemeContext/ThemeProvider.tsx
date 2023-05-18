@@ -1,15 +1,15 @@
 'use client'
 import { useReducer } from 'react'
 import { ThemeContext } from './ThemeContext'
-import { initialTheme } from './types'
-import { ThemeReducer } from './ThemeReducer'
+// import { ThemeState, initialTheme } from './types'
+import { ThemeReducer, defaultTheme } from './ThemeReducer'
 
 interface Props {
   children: React.ReactNode
 }
 
 export const ThemeProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(ThemeReducer, initialTheme)
+  const [state, dispatch] = useReducer(ThemeReducer, defaultTheme)
 
   return (
     <ThemeContext.Provider value={{ state, dispatch }}>

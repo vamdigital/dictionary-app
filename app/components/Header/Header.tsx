@@ -7,10 +7,10 @@ import { useThemeContext } from '@vam/context/ThemeContext/ThemeContext'
 import { ActionType } from '@vam/context/ThemeContext/types'
 
 export const Header = () => {
-  const [buttonText, setButtonText] = useState('🌙')
   const { dispatch } = useFontFamilyContext()
   const { state, dispatch: themeDispatch } = useThemeContext()
-
+  const buttonInitialIcon = state.theme === ActionType.DARK ? '🔆' : '🌙'
+  const [buttonText, setButtonText] = useState(buttonInitialIcon)
   const changeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch({ type: e.target.value } as ActionTypes)
   }
