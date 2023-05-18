@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { Header } from '@vam/components/Header'
 import { SearchBox } from '@vam/components/SearchBox'
 import { DictionaryDetails } from '@vam/components/DictionaryDetails'
-import { useFontFamilyContext } from './context/fontFamily/context'
-import { useFetch } from './data/useFetch'
-import { useThemeContext } from './context/ThemeContext/ThemeContext'
+import { useFontFamilyContext } from '@vam/context/fontFamily/context'
+import { useFetch } from '@vam/data/useFetch'
+import { useThemeContext } from '@vam/context/ThemeContext/ThemeContext'
+import { Loader } from '@vam/components/Loader'
 
 export default function Home() {
   const [searchedWord, setSearchedWord] = useState('')
@@ -44,7 +45,7 @@ export default function Home() {
       <div className="container">
         <Header />
         <SearchBox submitHandler={submitHandler} />
-        {isLoading && <div>isLoading</div>}
+        {isLoading && <Loader />}
         {isError && <div>error</div>}
         {data && data.title && <div>{data.title}</div>}
         {data && data.title == null && (
