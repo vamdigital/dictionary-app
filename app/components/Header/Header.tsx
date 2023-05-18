@@ -7,7 +7,7 @@ import { useThemeContext } from '@vam/context/ThemeContext/ThemeContext'
 import { ActionType } from '@vam/context/ThemeContext/types'
 
 export const Header = () => {
-  const [buttonText, setButtonText] = useState('Dark')
+  const [buttonText, setButtonText] = useState('🌙')
   const { dispatch } = useFontFamilyContext()
   const { state, dispatch: themeDispatch } = useThemeContext()
 
@@ -18,10 +18,10 @@ export const Header = () => {
   const themeButtonClickHandler = () => {
     if (state.theme === ActionType.DARK) {
       themeDispatch(ActionType.LIGHT)
-      setButtonText('Dark')
+      setButtonText('🌙 ')
     } else {
       themeDispatch(ActionType.DARK)
-      setButtonText('Light')
+      setButtonText('🔆')
     }
   }
 

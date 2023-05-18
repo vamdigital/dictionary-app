@@ -14,7 +14,7 @@ export default function Home() {
   const { data, isLoading, isError } = useFetch(searchedWord)
   const { state } = useFontFamilyContext()
   const { fontFamily } = state
-  const { state: themeState, dispatch: themeDispatch } = useThemeContext()
+  const { state: themeState } = useThemeContext()
   const submitHandler = (val: string) => {
     setSearchedWord(val)
   }
