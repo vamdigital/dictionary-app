@@ -1,17 +1,19 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '@vam/components/Header'
 import { SearchBox } from '@vam/components/SearchBox'
 import { DictionaryDetails } from '@vam/components/DictionaryDetails'
 import { useFontFamilyContext } from './context/fontFamily/context'
 import { useFetch } from './data/useFetch'
+import { useThemeContext } from './context/ThemeContext/ThemeContext'
 
 export default function Home() {
   const [searchedWord, setSearchedWord] = useState('')
   const { data, isLoading, isError } = useFetch(searchedWord)
   const { state } = useFontFamilyContext()
   const { fontFamily } = state
+  const { state: themeState, dispatch: themeDispatch } = useThemeContext()
   const submitHandler = (val: string) => {
     setSearchedWord(val)
   }
@@ -28,6 +30,14 @@ export default function Home() {
         return 'font-serif'
     }
   }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const themeClasses = ['dark', 'light']
+      window.document.documentElement.classList.remove(...themeClasses)
+      window.document.documentElement.classList.add(themeState.theme)
+    }
+  }, [themeState.theme])
 
   return (
     <main className={`flex flex-col ${fontFam()}`}>

@@ -10,7 +10,7 @@ const DefinitionList = ({ definition }: { definition: Definition[] }) => {
   return (
     <ul className="list-disc px-5">
       {definition.map((def, index) => (
-        <li className="text-slate-700 pb-2" key={index}>
+        <li className="text-slate-700 dark:text-slate-400 pb-2" key={index}>
           {def.definition}
         </li>
       ))}
@@ -26,7 +26,7 @@ const ExampleText = ({ definition }: { definition: Definition[] }) => {
         return (
           <blockquote
             key={`example-${index}`}
-            className="text-slate-700 italic"
+            className="text-slate-700 dark:text-slate-300 italic"
           >
             {`"${def.example}"`}
           </blockquote>
@@ -61,7 +61,7 @@ export const DictionaryDetails = ({ data }: Props) => {
               <div className="flex">
                 <div className="flex flex-col">
                   <h1 className="text-4xl lg:text-5xl flex pb-4">{d.word}</h1>
-                  <span className="text-sm flex text-purple-700">
+                  <span className="text-sm flex text-purple-700 dark:text-sky-400">
                     {d.phonetic}
                   </span>
                 </div>
@@ -74,17 +74,17 @@ export const DictionaryDetails = ({ data }: Props) => {
                   <h2 className="text-2xl lg:text-3xl mb-11">
                     {meaning.partOfSpeech}
                   </h2>
-                  <h3 className="text-2xl lg:text-3xl text-slate-500 mb-5">
+                  <h3 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 mb-5">
                     Meaning
                   </h3>
                   <DefinitionList definition={meaning.definitions} />
                   {meaning.synonyms && meaning.synonyms.length > 0 && (
                     <div className="flex items-center gap-3 my-5">
-                      <h4 className="text-2xl lg:text-3xl text-slate-500">
+                      <h4 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400">
                         Synonyms
                       </h4>
                       <div className="flex">
-                        <span className="flex text-xl text-purple-700">
+                        <span className="flex text-xl text-purple-700 dark:text-sky-400">
                           {joinedList({ synonym: meaning.synonyms })}
                         </span>
                       </div>
@@ -93,11 +93,11 @@ export const DictionaryDetails = ({ data }: Props) => {
 
                   {meaning.antonymns && meaning.antonymns.length > 0 && (
                     <div className="flex items-baseline">
-                      <h4 className="text-2xl lg:text-3xl text-slate-500 mb-5">
+                      <h4 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 mb-5">
                         Antonymns
                       </h4>
                       <div className="flex">
-                        <span className="flex text-xl text-purple-700">
+                        <span className="flex text-xl text-purple-700 dark:text-sky-400">
                           {joinedList({ synonym: meaning.antonymns })}
                         </span>
                       </div>
@@ -113,7 +113,7 @@ export const DictionaryDetails = ({ data }: Props) => {
                 <a
                   key={url}
                   href={url}
-                  className="flex overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-blue-700 underline underline-offset-4"
+                  className="flex overflow-hidden overflow-ellipsis whitespace-nowrap text-sm text-blue-700 dark:text-sky-400 underline underline-offset-4"
                   target="_blank"
                 >
                   {url}

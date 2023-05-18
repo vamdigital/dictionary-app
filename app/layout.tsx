@@ -1,6 +1,7 @@
 import React from 'react'
 import './globals.css'
 import { FontFamilyProvider } from './context/fontFamily/provider'
+import { ThemeProvider } from './context/ThemeContext/ThemeProvider'
 
 export const metadata = {
   title: 'Dictionary App',
@@ -14,9 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <FontFamilyProvider>{children}</FontFamilyProvider>
-      </body>
+      <ThemeProvider>
+        <body>
+          <FontFamilyProvider>{children}</FontFamilyProvider>
+        </body>
+      </ThemeProvider>
     </html>
   )
 }

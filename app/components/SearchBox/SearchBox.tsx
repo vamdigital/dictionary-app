@@ -32,7 +32,7 @@ export const SearchBox = ({ submitHandler }: Props) => {
           name="search"
           value={value}
           onChange={onChangeHandler}
-          className="flex h-11 rounded-md border-2 border-blue-500 focus-visible:border-purple-600 w-full p-3"
+          className="flex h-11 rounded-md border-2 border-blue-500 focus-visible:border-purple-600 w-full p-3 dark:text-slate-800"
           autoFocus
         />
         <SearchIcon className="absolute right-3 top-3" />
