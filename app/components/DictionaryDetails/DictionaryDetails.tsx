@@ -62,8 +62,6 @@ const joinedList = ({ synonym }: { synonym: string[] }) => {
 }
 
 export const DictionaryDetails = ({ data }: Props) => {
-  const encoder = new TextEncoder()
-
   return (
     <div className="mt-11 flex">
       {data.slice(0, 1).map(d => {
@@ -75,7 +73,7 @@ export const DictionaryDetails = ({ data }: Props) => {
                 <div className="flex flex-col">
                   <h1 className="text-4xl lg:text-5xl flex pb-4">{d.word}</h1>
                   <code className="text-sm flex text-purple-700 dark:text-sky-400">
-                    {decodeURI(d.phonetic)}
+                    {d.phonetic}
                   </code>
                 </div>
               </div>
