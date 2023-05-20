@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import SearchIcon from '../../../public/icon_search.svg'
 
 interface Props {
@@ -7,6 +7,8 @@ interface Props {
 
 export const SearchBox = ({ submitHandler }: Props) => {
   const [value, setValue] = useState('')
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -21,6 +23,10 @@ export const SearchBox = ({ submitHandler }: Props) => {
     const search = target.search.value
     submitHandler(search)
     setValue('')
+
+    if (inputRef.current) {
+      inputRef.current.blur()
+    }
   }
   return (
     <form onSubmit={formSubmitHandler}>
@@ -30,10 +36,10 @@ export const SearchBox = ({ submitHandler }: Props) => {
           id="search"
           placeholder="Enter text"
           name="search"
+          ref={inputRef}
           value={value}
           onChange={onChangeHandler}
           className="flex h-11 rounded-md border-2 border-blue-500 focus-visible:border-purple-600 w-full p-3 dark:text-slate-800"
-          autoFocus
         />
         <SearchIcon className="absolute right-3 top-3" />
       </fieldset>
