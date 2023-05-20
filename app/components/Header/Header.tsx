@@ -39,7 +39,7 @@ export const Header = () => {
           <select
             name="font"
             id="font"
-            className="min-w-[170px] text-center  text-md focus:outline-none dark:text-slate-800 text-slate-100 dark:bg-white bg-slate-800 "
+            className="min-w-[170px] text-center  text-md focus:outline-none dark:text-slate-800 text-slate-100 dark:bg-white bg-slate-800 appearance-none "
             onChange={changeHandler}
           >
             <option value="serif">Serif</option>

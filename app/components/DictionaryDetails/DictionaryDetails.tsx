@@ -20,22 +20,29 @@ const DefinitionList = ({ definition }: { definition: Definition[] }) => {
 
 const ExampleText = ({ definition }: { definition: Definition[] }) => {
   return (
-    <div className="flex flex-col my-8">
-      <h4 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 mb-5 underline underline-offset-8">
-        Example
-      </h4>
+    <>
+      {definition.map((def, index) => {
+        if (!def.example) return null
+        return (
+          <div className="flex flex-col mt-8 mb-0" key={`def-${index}`}>
+            <h4 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 mt-0 mb-5 underline underline-offset-8">
+              Example
+            </h4>
+          </div>
+        )
+      })}
       {definition.map((def, index) => {
         if (!def.example) return null
         return (
           <blockquote
             key={`example-${index}`}
-            className="text-slate-700 dark:text-slate-300 italic py-3 border-b-[1px] last:border-none border-b-gray-400"
+            className="text-slate-700 dark:text-slate-300 italic pb-3 pt-0 border-b-[1px] last:border-none border-b-gray-400"
           >
             {`"${def.example}"`}
           </blockquote>
         )
       })}
-    </div>
+    </>
   )
 }
 
@@ -65,7 +72,7 @@ export const DictionaryDetails = ({ data }: Props) => {
                 <div className="flex flex-col">
                   <h1 className="text-4xl lg:text-5xl flex pb-4">{d.word}</h1>
                   <code className="text-sm flex text-purple-700 dark:text-sky-400">
-                    {d.phonetic}
+                    {JSON.parse(JSON.stringify(d.phonetic))}
                   </code>
                 </div>
               </div>
@@ -82,7 +89,7 @@ export const DictionaryDetails = ({ data }: Props) => {
                   </h3>
                   <DefinitionList definition={meaning.definitions} />
                   {meaning.synonyms && meaning.synonyms.length > 0 && (
-                    <div className="flex flex-col gap-3 my-8">
+                    <div className="flex flex-col gap-3 mt-8">
                       <h4 className="mb-2 text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 underline underline-offset-8">
                         Synonyms
                       </h4>
