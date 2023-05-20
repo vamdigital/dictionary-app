@@ -16,6 +16,11 @@ module.exports = {
       container: {
         center: true,
         padding: '1.5rem'
+      },
+      fontFamily: {
+        sans: ['Helvetica Neue', 'Arial', 'Noto Sans'],
+        serif: ['Times New Roman', 'Times', 'serif'],
+        mono: ['Menlo', 'Monaco', 'Consolas', 'monospace']
       }
     }
   },
