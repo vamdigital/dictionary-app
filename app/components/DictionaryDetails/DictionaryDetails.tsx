@@ -61,17 +61,17 @@ const joinedList = ({ synonym }: { synonym: string[] }) => {
   return list.join(', ')
 }
 
-const sanitizePhonetics = (phonetic: string): string | null => {
-  const regex = /\/(.*?)\//
-  const result = phonetic.match(regex)
-  const singleQuoteRegex = /'/g
-  if (result) {
-    return `/${result[1]}/`
-  }
-
-  return null
-}
-
+// const sanitizePhonetics = (phonetic: string): string | null => {
+//   const regex = /\/(.*?)\//
+//   const result = phonetic.match(regex)
+//   const singleQuoteRegex = /'/g
+//   if (result) {
+//     return `/${result[1]}/`
+//   }
+//
+//   return null
+// }
+//
 export const DictionaryDetails = ({ data }: Props) => {
   return (
     <div className="mt-11 flex">
@@ -83,9 +83,9 @@ export const DictionaryDetails = ({ data }: Props) => {
               <div className="flex">
                 <div className="flex flex-col">
                   <h1 className="text-4xl lg:text-5xl flex pb-4">{d.word}</h1>
-                  <code className="text-sm flex text-purple-700 dark:text-sky-400">
-                    {sanitizePhonetics(d.phonetic)}
-                  </code>
+                  <span className="text-sm flex text-purple-700 dark:text-sky-400">
+                    {d.phonetic}
+                  </span>
                 </div>
               </div>
               {audioUrl && <PlayAudio audioSrc={audioUrl?.audio} />}
