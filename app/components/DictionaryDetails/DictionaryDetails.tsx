@@ -64,9 +64,9 @@ export const DictionaryDetails = ({ data }: Props) => {
               <div className="flex">
                 <div className="flex flex-col">
                   <h1 className="text-4xl lg:text-5xl flex pb-4">{d.word}</h1>
-                  <pre className="text-sm flex text-purple-700 dark:text-sky-400">
+                  <code className="text-sm flex text-purple-700 dark:text-sky-400">
                     {d.phonetic}
-                  </pre>
+                  </code>
                 </div>
               </div>
               {audioUrl && <PlayAudio audioSrc={audioUrl?.audio} />}
