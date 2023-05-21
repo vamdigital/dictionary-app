@@ -1,7 +1,6 @@
 import { Data, Definition } from '@vam/data/types'
 import { PlayAudio } from '../PlayAudio'
 import Image from 'next/image'
-import { encode } from 'punycode'
 
 interface Props {
   data: Data[]
@@ -19,25 +18,35 @@ const DefinitionList = ({ definition }: { definition: Definition[] }) => {
   )
 }
 
+const ExampleHeading = ({ definition }: { definition: Definition[] }) => {
+  const filteredExamples = definition.filter(
+    def => def.example?.trim().length > 0
+  )
+
+  if (!filteredExamples) return null
+  return (
+    <>
+      {filteredExamples.slice(0, 1).map(f => (
+        <div className="flex flex-col mt-8 mb-0" key={f.example}>
+          <h4 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 mt-0 mb-5 underline underline-offset-8">
+            Example
+          </h4>
+        </div>
+      ))}
+    </>
+  )
+}
+
 const ExampleText = ({ definition }: { definition: Definition[] }) => {
   return (
     <>
       {definition.map((def, index) => {
-        if (!def.example) return null
-        return (
-          <div className="flex flex-col mt-8 mb-0" key={`def-${index}`}>
-            <h4 className="text-2xl lg:text-3xl text-slate-500 dark:text-slate-400 mt-0 mb-5 underline underline-offset-8">
-              Example
-            </h4>
-          </div>
-        )
-      })}
-      {definition.map((def, index) => {
+        console.log({ def })
         if (!def.example) return null
         return (
           <blockquote
             key={`example-${index}`}
-            className="text-slate-700 dark:text-slate-300 italic pb-3 pt-0 border-b-[1px] last:border-none border-b-gray-400"
+            className="text-slate-700 dark:text-slate-300 italic py-3 border-b-[1px] last:border-none border-b-gray-400"
           >
             {`"${def.example}"`}
           </blockquote>
@@ -125,6 +134,8 @@ export const DictionaryDetails = ({ data }: Props) => {
                       </div>
                     </div>
                   )}
+
+                  <ExampleHeading definition={meaning.definitions} />
                   <ExampleText definition={meaning.definitions} />
                 </div>
               </div>
